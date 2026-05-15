@@ -3,9 +3,16 @@ import { FiCopy, FiSettings, FiTrash2 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 const BotPreviewCard = ({ business, onManage, onDelete }) => {
-  const botLink = `https://wa.me/${business.virtualNumber.replace(/[^0-9]/g, '')}?text=start_${business.businessSlug}`;
+  const phoneNumber = business.virtualNumber.replace(/[^0-9]/g, '');
+  const joinLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent('join means-rapidly')}`;
+  const botLink = `https://wa.me/${phoneNumber}?text=start_${business.businessSlug}`;
 
-  const copyLink = () => {
+  const copyJoinLink = () => {
+    navigator.clipboard.writeText(joinLink);
+    toast.success('Join link copied!');
+  };
+
+  const copyBotLink = () => {
     navigator.clipboard.writeText(botLink);
     toast.success('Bot link copied!');
     console.log('[BotPreview] Link copied:', botLink);
@@ -22,12 +29,23 @@ const BotPreviewCard = ({ business, onManage, onDelete }) => {
         </div>
       </div>
 
+      {/* Join Link (for new users) */}
+      <div style={styles.linkBox}>
+        <p style={styles.linkLabel}>📲 Step 1 — Join Link (new users only):</p>
+        <div style={styles.linkRow}>
+          <code style={styles.linkText}>{joinLink}</code>
+          <button onClick={copyJoinLink} style={styles.copyBtnGreen} title="Copy join link">
+            <FiCopy />
+          </button>
+        </div>
+      </div>
+
       {/* Bot Link */}
       <div style={styles.linkBox}>
-        <p style={styles.linkLabel}>Bot Link:</p>
+        <p style={styles.linkLabel}>🤖 Step 2 — Bot Link (start chat):</p>
         <div style={styles.linkRow}>
           <code style={styles.linkText}>{botLink}</code>
-          <button onClick={copyLink} style={styles.copyBtn} title="Copy link">
+          <button onClick={copyBotLink} style={styles.copyBtn} title="Copy bot link">
             <FiCopy />
           </button>
         </div>
@@ -127,6 +145,16 @@ const styles = {
   copyBtn: {
     border: 'none',
     background: '#667eea',
+    color: '#fff',
+    borderRadius: '6px',
+    padding: '6px 10px',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  copyBtnGreen: {
+    border: 'none',
+    background: '#25D366',
     color: '#fff',
     borderRadius: '6px',
     padding: '6px 10px',
