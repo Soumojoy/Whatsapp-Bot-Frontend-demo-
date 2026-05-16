@@ -7,6 +7,7 @@ import BotPreviewCard from '../../components/BotPreviewCard';
 import DepositTable from '../../components/DepositTable';
 import OnboardTable from '../../components/OnboardTable';
 import ChatHistory from '../../components/ChatHistory';
+import PaymentOptionsManager from '../../components/PaymentOptionsManager';
 import { FiArrowLeft, FiSave } from 'react-icons/fi';
 
 const BusinessDetail = () => {
@@ -22,6 +23,7 @@ const BusinessDetail = () => {
     botName: '',
     greetingMessage: '',
     paymentQrUrl: '',
+    paymentMode: 'single',
     onboardingEnabled: false,
     onboardingMessage: '',
     onboardingOptions: '',
@@ -45,6 +47,7 @@ const BusinessDetail = () => {
         botName: res.data.botName,
         greetingMessage: res.data.greetingMessage,
         paymentQrUrl: res.data.paymentQrUrl || '',
+        paymentMode: res.data.paymentMode || 'single',
         onboardingEnabled: res.data.onboardingEnabled || false,
         onboardingMessage: res.data.onboardingMessage || '',
         onboardingOptions: res.data.onboardingOptions || '',
@@ -152,18 +155,15 @@ const BusinessDetail = () => {
                       style={{ ...styles.input, minHeight: '80px', resize: 'vertical' }}
                     />
                   </div>
-                  <div style={styles.field}>
-                    <label style={styles.label}>💳 Payment QR Image URL</label>
-                    <input
-                      value={form.paymentQrUrl}
-                      onChange={(e) => setForm({ ...form, paymentQrUrl: e.target.value })}
-                      placeholder="https://example.com/qr-code.png"
-                      style={styles.input}
-                    />
-                    <span style={{ fontSize: '11px', color: '#888' }}>
-                      Paste a direct image URL of your payment QR code. Sent to customers during deposit flow.
-                    </span>
-                  </div>
+                  {/* Payment Options Manager */}
+                  <PaymentOptionsManager
+                    businessId={id}
+                    business={form}
+                    onBusinessUpdated={(updated) => {
+                      setBusiness(updated);
+                      setForm((prev) => ({ ...prev, paymentMode: updated.paymentMode }));
+                    }}
+                  />
 
                   {/* Onboarding Settings */}
                   <div style={{ borderTop: '1px solid #eee', paddingTop: '16px', marginTop: '8px' }}>
@@ -214,10 +214,7 @@ const BusinessDetail = () => {
                   <p><strong>Bot Name:</strong> {business.botName}</p>
                   <p><strong>Virtual Number:</strong> {business.virtualNumber}</p>
                   <p><strong>Greeting:</strong> {business.greetingMessage}</p>
-                  <p><strong>Payment QR:</strong> {business.paymentQrUrl ? '✅ Set' : '❌ Not set'}</p>
-                  {business.paymentQrUrl && (
-                    <img src={business.paymentQrUrl} alt="Payment QR" style={{ maxWidth: '150px', marginTop: '8px', borderRadius: '8px' }} />
-                  )}
+                  <p><strong>Payment Mode:</strong> {business.paymentMode === 'multiple' ? '🔀 Multiple (Batch-based)' : '💳 Single'}</p>
                   <p><strong>Create Account:</strong> {business.onboardingEnabled ? '✅ Enabled' : '❌ Disabled'}</p>
                 </div>
               )}
