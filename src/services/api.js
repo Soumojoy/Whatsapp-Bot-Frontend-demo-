@@ -85,4 +85,9 @@ export const onboardAPI = {
   getByBusiness: (businessId) => api.get(`/business/${businessId}/onboard-accounts`),
 };
 
+// Chat History APIs
+export const chatAPI = {
+  getByBusiness: (businessId) => api.get(`/business/${businessId}/chats`),
+};
+
 export default api;
