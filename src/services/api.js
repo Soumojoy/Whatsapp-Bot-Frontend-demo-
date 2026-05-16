@@ -90,4 +90,12 @@ export const chatAPI = {
   getByBusiness: (businessId) => api.get(`/business/${businessId}/chats`),
 };
 
+// Payment Option APIs
+export const paymentOptionAPI = {
+  getAll: (businessId) => api.get(`/business/${businessId}/payment-options`),
+  create: (businessId, data) => api.post(`/business/${businessId}/payment-options`, data),
+  update: (businessId, optionId, data) => api.put(`/business/${businessId}/payment-options/${optionId}`, data),
+  delete: (businessId, optionId) => api.delete(`/business/${businessId}/payment-options/${optionId}`),
+};
+
 export default api;
