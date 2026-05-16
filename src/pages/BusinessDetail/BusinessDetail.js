@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { businessAPI, flowAPI, onboardAPI } from '../../services/api';
+import { businessAPI, flowAPI, onboardAPI, chatAPI } from '../../services/api';
 import toast from 'react-hot-toast';
 import FlowBuilder from '../../components/FlowBuilder';
 import BotPreviewCard from '../../components/BotPreviewCard';
 import DepositTable from '../../components/DepositTable';
 import OnboardTable from '../../components/OnboardTable';
+import ChatHistory from '../../components/ChatHistory';
 import { FiArrowLeft, FiSave } from 'react-icons/fi';
 
 const BusinessDetail = () => {
@@ -244,6 +245,9 @@ const BusinessDetail = () => {
           </div>
           <OnboardTable accounts={onboardAccounts} />
         </div>
+
+        {/* Chat History */}
+        <ChatHistory businessId={id} />
       </main>
     </div>
   );
