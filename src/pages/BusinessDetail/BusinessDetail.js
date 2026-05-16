@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { businessAPI, flowAPI, onboardAPI, chatAPI } from '../../services/api';
+import { businessAPI, flowAPI, onboardAPI } from '../../services/api';
 import toast from 'react-hot-toast';
 import FlowBuilder from '../../components/FlowBuilder';
 import BotPreviewCard from '../../components/BotPreviewCard';
