@@ -80,4 +80,9 @@ export const depositAPI = {
   updateStatus: (id, status) => api.put(`/deposits/${id}/status`, { status }),
 };
 
+// Onboard Account APIs
+export const onboardAPI = {
+  getByBusiness: (businessId) => api.get(`/business/${businessId}/onboard-accounts`),
+};
+
 export default api;
