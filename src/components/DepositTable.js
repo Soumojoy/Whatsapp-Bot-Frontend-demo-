@@ -80,6 +80,7 @@ const DepositTable = ({ businessId }) => {
                 <th style={styles.th}>#</th>
                 <th style={styles.th}>Name</th>
                 <th style={styles.th}>Phone</th>
+                <th style={styles.th}>WhatsApp</th>
                 <th style={styles.th}>Transaction ID</th>
                 <th style={styles.th}>Amount</th>
                 <th style={styles.th}>Status</th>
@@ -93,6 +94,7 @@ const DepositTable = ({ businessId }) => {
                   <td style={styles.td}>{index + 1}</td>
                   <td style={styles.td}><strong>{dep.customerName}</strong></td>
                   <td style={styles.td}>{dep.customerNumber}</td>
+                  <td style={styles.td}>{dep.whatsappNumber || '—'}</td>
                   <td style={{ ...styles.td, fontFamily: 'monospace', fontSize: '12px' }}>{dep.transactionId}</td>
                   <td style={{ ...styles.td, fontWeight: '700', color: '#27ae60' }}>₹{dep.amount}</td>
                   <td style={styles.td}>
