@@ -79,7 +79,7 @@ const DepositTable = ({ businessId }) => {
               <tr>
                 <th style={styles.th}>#</th>
                 <th style={styles.th}>Name</th>
-                <th style={styles.th}>Phone</th>
+               <th style={styles.th}>User ID</th>
                 <th style={styles.th}>WhatsApp</th>
                 <th style={styles.th}>Transaction ID</th>
                 <th style={styles.th}>Amount</th>
